@@ -1,0 +1,34 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "seven_pay (PROD)",
+            "program": "lib/main_prod.dart",
+            "request": "launch",
+            "type": "dart",
+        },
+        {
+            "name": "seven_pay (DEV)",
+            "program": "lib/main_dev.dart",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "seven_pay (PROFILE)",
+            "program": "lib/main_prod.dart",
+
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "seven_pay (RELEASE)",
+            "program": "lib/main_prod.dart",
+
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        }
+    ]
+}
