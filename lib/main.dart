@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:seven_pay/app_config.dart';
+import 'package:seven_pay/module/address/pages/address_page.dart';
 
 void initializeMain(AppConfig appConfig) {
   runApp(
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Container(),
+      home: const AddressPage(),
     );
   }
 }
