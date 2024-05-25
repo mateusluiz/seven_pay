@@ -43,70 +43,50 @@ class AddressPage extends StatelessWidget {
               ],
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 55,
-            ),
-            child: Column(
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Colors.black,
-                    ),
-                    borderRadius: BorderRadius.circular(10),
+          _BoxSpacing(
+            children: [
+              Row(
+                children: const [
+                  _InputText(labelText: 'BAIRRO'),
+                  SizedBox(width: 30),
+                  _InputText(labelText: 'UF'),
+                ],
+              ),
+              Row(
+                children: [
+                  _Button(
+                    text: 'FILTRAR',
+                    onTap: () {},
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 10,
-                      horizontal: 25,
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: const [
-                            _InputText(labelText: 'BAIRRO'),
-                            SizedBox(width: 30),
-                            _InputText(labelText: 'UF'),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            _Button(
-                              text: 'FILTRAR',
-                              onTap: () {},
-                            ),
-                            const SizedBox(width: 12),
-                            _Button(
-                              text: 'ATUALIZAR',
-                              paddingHorizontal: 14,
-                              onTap: () {},
-                            ),
-                            const SizedBox(width: 12),
-                            _Button(
-                              text: 'CADASTRAR',
-                              paddingHorizontal: 10,
-                              onTap: () {},
-                              icon: const Icon(
-                                Icons.add_circle,
-                                size: 22,
-                                color: Colors.grey,
-                              ),
-                            ),
-                            const SizedBox(width: 40),
-                            GestureDetector(
-                              onTap: () {},
-                              child: const Icon(Icons.download),
-                            ),
-                          ],
-                        ),
-                      ],
+                  const SizedBox(width: 12),
+                  _Button(
+                    text: 'ATUALIZAR',
+                    paddingHorizontal: 14,
+                    onTap: () {},
+                  ),
+                  const SizedBox(width: 12),
+                  _Button(
+                    text: 'CADASTRAR',
+                    paddingHorizontal: 10,
+                    onTap: () {},
+                    icon: const Icon(
+                      Icons.add_circle,
+                      size: 22,
+                      color: Colors.grey,
                     ),
                   ),
-                ),
-              ],
-            ),
+                  const SizedBox(width: 40),
+                  GestureDetector(
+                    onTap: () {},
+                    child: const Icon(Icons.download),
+                  ),
+                ],
+              ),
+            ],
+          ),
+          const SizedBox(height: 24),
+          const _BoxSpacing(
+            children: [],
           ),
         ],
       ),
@@ -213,6 +193,56 @@ class _Button extends StatelessWidget {
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class _BoxSpacing extends StatelessWidget {
+  final double paddingHorizontal;
+  final List<Widget> children;
+
+  const _BoxSpacing({
+    Key? key,
+    required this.children,
+    this.paddingHorizontal = 25,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 55,
+      ),
+      child: Column(
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              border: Border.all(
+                color: Colors.black,
+              ),
+              borderRadius: BorderRadius.circular(10),
+              boxShadow: [
+                BoxShadow(
+                  offset: const Offset(0, 1),
+                  blurRadius: 4,
+                  color: Colors.black.withOpacity(0.1),
+                ),
+              ],
+            ),
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                vertical: 10,
+                horizontal: paddingHorizontal,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: children,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
