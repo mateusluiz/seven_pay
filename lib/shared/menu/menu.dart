@@ -234,10 +234,14 @@ class Menu extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: Row(
-                children: [
-                  ...children,
-                ],
+              child: SizedBox(
+                width: size.width - drawerWidth,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ...children,
+                  ],
+                ),
               ),
             ),
           ],
