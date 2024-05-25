@@ -7,6 +7,201 @@ class AddressPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final addressList = [
+      {
+        'cep': '91420-270',
+        'logradouro': 'Rua São Domingos',
+        'complemento': '',
+        'bairro': 'Bom Jesus',
+        'localidade': 'Porto Alegre',
+        'uf': 'RS',
+        'ibge': '4314902',
+        'gia': '',
+        'ddd': '51',
+        'siafi': '8801'
+      },
+      {
+        'cep': '91040-000',
+        'logradouro': 'Rua Domingos Rubbo',
+        'complemento': '',
+        'bairro': 'Cristo Redentor',
+        'localidade': 'Porto Alegre',
+        'uf': 'RS',
+        'ibge': '4314902',
+        'gia': '',
+        'ddd': '51',
+        'siafi': '8801'
+      },
+      {
+        'cep': '91040-320',
+        'logradouro': 'Rua Domingos Martins',
+        'complemento': '',
+        'bairro': 'Cristo Redentor',
+        'localidade': 'Porto Alegre',
+        'uf': 'RS',
+        'ibge': '4314902',
+        'gia': '',
+        'ddd': '51',
+        'siafi': '8801'
+      },
+      {
+        'cep': '91120-090',
+        'logradouro': 'Rua Domingos de Abreu',
+        'complemento': '',
+        'bairro': 'Sarandi',
+        'localidade': 'Porto Alegre',
+        'uf': 'RS',
+        'ibge': '4314902',
+        'gia': '',
+        'ddd': '51',
+        'siafi': '8801'
+      },
+      {
+        'cep': '91910-450',
+        'logradouro': 'Rua Domingos da Silva',
+        'complemento': '',
+        'bairro': 'Camaquã',
+        'localidade': 'Porto Alegre',
+        'uf': 'RS',
+        'ibge': '4314902',
+        'gia': '',
+        'ddd': '51',
+        'siafi': '8801'
+      },
+      {
+        'cep': '91360-040',
+        'logradouro': 'Rua Domingos Seguézio',
+        'complemento': '',
+        'bairro': 'Vila Ipiranga',
+        'localidade': 'Porto Alegre',
+        'uf': 'RS',
+        'ibge': '4314902',
+        'gia': '',
+        'ddd': '51',
+        'siafi': '8801'
+      },
+      {
+        'cep': '91790-072',
+        'logradouro': 'Rua Domingos José Poli',
+        'complemento': '',
+        'bairro': 'Restinga',
+        'localidade': 'Porto Alegre',
+        'uf': 'RS',
+        'ibge': '4314902',
+        'gia': '',
+        'ddd': '51',
+        'siafi': '8801'
+      },
+      {
+        'cep': '91160-080',
+        'logradouro': 'Rua Luiz Domingos Ramos',
+        'complemento': '',
+        'bairro': 'Santa Rosa de Lima',
+        'localidade': 'Porto Alegre',
+        'uf': 'RS',
+        'ibge': '4314902',
+        'gia': '',
+        'ddd': '51',
+        'siafi': '8801'
+      },
+      {
+        'cep': '90650-090',
+        'logradouro': 'Rua Domingos Crescêncio',
+        'complemento': '',
+        'bairro': 'Santana',
+        'localidade': 'Porto Alegre',
+        'uf': 'RS',
+        'ibge': '4314902',
+        'gia': '',
+        'ddd': '51',
+        'siafi': '8801'
+      },
+      {
+        'cep': '91910-420',
+        'logradouro': 'Rua José Domingos Varella',
+        'complemento': '',
+        'bairro': 'Cavalhada',
+        'localidade': 'Porto Alegre',
+        'uf': 'RS',
+        'ibge': '4314902',
+        'gia': '',
+        'ddd': '51',
+        'siafi': '8801'
+      },
+      {
+        'cep': '91261-304',
+        'logradouro': 'Rua Domingos Mullet Rodrigues',
+        'complemento': '',
+        'bairro': 'Mário Quintana',
+        'localidade': 'Porto Alegre',
+        'uf': 'RS',
+        'ibge': '4314902',
+        'gia': '',
+        'ddd': '51',
+        'siafi': '8801'
+      },
+      {
+        'cep': '90420-200',
+        'logradouro': 'Rua Domingos José de Almeida',
+        'complemento': '',
+        'bairro': 'Rio Branco',
+        'localidade': 'Porto Alegre',
+        'uf': 'RS',
+        'ibge': '4314902',
+        'gia': '',
+        'ddd': '51',
+        'siafi': '8801'
+      },
+      {
+        'cep': '91790-101',
+        'logradouro': 'Rua Domingos Manoel Mincarone',
+        'complemento': '',
+        'bairro': 'Restinga',
+        'localidade': 'Porto Alegre',
+        'uf': 'RS',
+        'ibge': '4314902',
+        'gia': '',
+        'ddd': '51',
+        'siafi': '8801'
+      },
+      {
+        'cep': '91120-480',
+        'logradouro': 'Rua Domingos Antônio Santoro',
+        'complemento': '',
+        'bairro': 'Sarandi',
+        'localidade': 'Porto Alegre',
+        'uf': 'RS',
+        'ibge': '4314902',
+        'gia': '',
+        'ddd': '51',
+        'siafi': '8801'
+      },
+      {
+        'cep': '91540-650',
+        'logradouro': 'Acesso Olavo Domingos de Oliveira',
+        'complemento': '',
+        'bairro': 'Jardim Carvalho',
+        'localidade': 'Porto Alegre',
+        'uf': 'RS',
+        'ibge': '4314902',
+        'gia': '',
+        'ddd': '51',
+        'siafi': '8801'
+      },
+      {
+        'cep': '91740-650',
+        'logradouro': 'Praça Domingos Fernandes de Souza',
+        'complemento': '',
+        'bairro': 'Cavalhada',
+        'localidade': 'Porto Alegre',
+        'uf': 'RS',
+        'ibge': '4314902',
+        'gia': '',
+        'ddd': '51',
+        'siafi': '8801'
+      }
+    ];
+
     return Scaffold(
       body: Menu(
         title: 'Olá João',
@@ -85,10 +280,121 @@ class AddressPage extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 24),
-          const _BoxSpacing(
-            children: [],
+          _BoxSpacing(
+            paddingHorizontal: 14,
+            children: [
+              Expanded(
+                child: SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.4,
+                  child: ListView(
+                    children: [
+                      Table(
+                        border: TableBorder.symmetric(
+                          inside: BorderSide.none,
+                          outside: BorderSide.none,
+                        ),
+                        columnWidths: const {
+                          0: FixedColumnWidth(100.0),
+                          1: FlexColumnWidth(),
+                          2: FlexColumnWidth(),
+                          3: FixedColumnWidth(100.0),
+                          4: FixedColumnWidth(100.0),
+                          5: FixedColumnWidth(50.0),
+                          6: FixedColumnWidth(100.0),
+                          7: FixedColumnWidth(100.0),
+                        },
+                        children: [
+                          TableRow(
+                            children: [
+                              _titleAddress(title: 'CEP'),
+                              _titleAddress(title: 'Logradouro'),
+                              _titleAddress(title: 'Complemento'),
+                              _titleAddress(title: 'Bairro'),
+                              _titleAddress(title: 'Localidade'),
+                              _titleAddress(title: 'UF'),
+                              _titleAddress(title: 'IBGE'),
+                              _titleAddress(title: 'Opçoes'),
+                            ],
+                          ),
+                        ],
+                      ),
+                      ...addressList.asMap().entries.map((addressMap) {
+                        final addressIndex = addressMap.key;
+                        final address = addressMap.value;
+
+                        return Column(
+                          children: [
+                            Table(
+                              columnWidths: const {
+                                0: FixedColumnWidth(100.0),
+                                1: FlexColumnWidth(),
+                                2: FlexColumnWidth(),
+                                3: FixedColumnWidth(100.0),
+                                4: FixedColumnWidth(100.0),
+                                5: FixedColumnWidth(50.0),
+                                6: FixedColumnWidth(100.0),
+                                7: FixedColumnWidth(100.0),
+                              },
+                              children: [
+                                TableRow(
+                                  children: [
+                                    _cellText(text: address['cep']),
+                                    _cellText(text: address['logradouro']),
+                                    _cellText(text: address['complemento']),
+                                    _cellText(text: address['bairro']),
+                                    _cellText(text: address['localidade']),
+                                    _cellText(text: address['uf']),
+                                    _cellText(text: address['ibge']),
+                                    const Icon(
+                                      Icons.menu,
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                            if (addressIndex != addressList.length - 1) ...[
+                              const Divider(
+                                color: AppTheme.darkGreyOpacity,
+                                thickness: 2,
+                              ),
+                            ],
+                          ],
+                        );
+                      }).toList(),
+                    ],
+                  ),
+                ),
+              ),
+            ],
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _titleAddress({
+    required String title,
+  }) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Text(
+        title,
+        textAlign: TextAlign.center,
+        style: const TextStyle(
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+    );
+  }
+
+  Widget _cellText({
+    required String? text,
+  }) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Text(
+        text ?? '',
+        textAlign: TextAlign.center,
       ),
     );
   }
