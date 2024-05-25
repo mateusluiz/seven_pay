@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:seven_pay/module/address/models/address_via_cep.dart';
 import 'package:seven_pay/shared/menu/menu.dart';
 import 'package:seven_pay/theme/app_theme.dart';
 
@@ -202,6 +203,9 @@ class AddressPage extends StatelessWidget {
       }
     ];
 
+    List<Address> addresses =
+        addressList.map((e) => Address.fromJson(e)).toList();
+
     return Scaffold(
       body: Menu(
         title: 'Olá João',
@@ -318,7 +322,7 @@ class AddressPage extends StatelessWidget {
                           ),
                         ],
                       ),
-                      ...addressList.asMap().entries.map((addressMap) {
+                      ...addresses.asMap().entries.map((addressMap) {
                         final addressIndex = addressMap.key;
                         final address = addressMap.value;
 
@@ -338,13 +342,13 @@ class AddressPage extends StatelessWidget {
                               children: [
                                 TableRow(
                                   children: [
-                                    _cellText(text: address['cep']),
-                                    _cellText(text: address['logradouro']),
-                                    _cellText(text: address['complemento']),
-                                    _cellText(text: address['bairro']),
-                                    _cellText(text: address['localidade']),
-                                    _cellText(text: address['uf']),
-                                    _cellText(text: address['ibge']),
+                                    _cellText(text: address.cep),
+                                    _cellText(text: address.logradouro),
+                                    _cellText(text: address.complemento),
+                                    _cellText(text: address.bairro),
+                                    _cellText(text: address.localidade),
+                                    _cellText(text: address.uf),
+                                    _cellText(text: address.ibge),
                                     const Icon(
                                       Icons.menu,
                                     ),
