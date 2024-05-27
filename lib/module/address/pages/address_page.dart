@@ -60,12 +60,12 @@ class AddressPage extends StatelessWidget {
                 children: [
                   _InputText(
                     labelText: 'BAIRRO',
-                    controller: controller.textControllerNeighborhood,
+                    controller: controller.controllerNeighborhoodFilter,
                     onChanged: (value) {
                       controller.filterAddress(
                         neighborhood:
-                            controller.textControllerNeighborhood.text,
-                        fu: controller.textControllerFu.text,
+                            controller.controllerNeighborhoodFilter.text,
+                        fu: controller.controllerFuFilter.text,
                         context: context,
                       );
                     },
@@ -73,12 +73,12 @@ class AddressPage extends StatelessWidget {
                   const SizedBox(width: 30),
                   _InputText(
                     labelText: 'UF',
-                    controller: controller.textControllerFu,
+                    controller: controller.controllerFuFilter,
                     onChanged: (value) {
                       controller.filterAddress(
                         neighborhood:
-                            controller.textControllerNeighborhood.text,
-                        fu: controller.textControllerFu.text,
+                            controller.controllerNeighborhoodFilter.text,
+                        fu: controller.controllerFuFilter.text,
                         context: context,
                       );
                     },
@@ -92,8 +92,8 @@ class AddressPage extends StatelessWidget {
                     onTap: () {
                       controller.filterAddress(
                         neighborhood:
-                            controller.textControllerNeighborhood.text,
-                        fu: controller.textControllerFu.text,
+                            controller.controllerNeighborhoodFilter.text,
+                        fu: controller.controllerFuFilter.text,
                         context: context,
                       );
                     },
@@ -432,12 +432,9 @@ void _showDialog({
   required BuildContext context,
   required AddressController controller,
 }) {
-  final controllerFu = TextEditingController();
-  final controllerCity = TextEditingController();
-  final controllerPublicPlace = TextEditingController();
-
   showDialog(
     context: context,
+    barrierDismissible: false,
     builder: (BuildContext context) {
       return AlertDialog(
         title: const Center(
@@ -453,7 +450,7 @@ void _showDialog({
                   Expanded(
                     child: _InputText(
                       labelText: 'UF',
-                      controller: controllerFu,
+                      controller: controller.controllerFu,
                       onChanged: (_) {},
                     ),
                   ),
@@ -465,7 +462,7 @@ void _showDialog({
                   Expanded(
                     child: _InputText(
                       labelText: 'Cidade',
-                      controller: controllerCity,
+                      controller: controller.controllerCity,
                       onChanged: (_) {},
                     ),
                   ),
@@ -477,7 +474,7 @@ void _showDialog({
                   Expanded(
                     child: _InputText(
                       labelText: 'Logradouro',
-                      controller: controllerPublicPlace,
+                      controller: controller.controllerPublicPlace,
                       onChanged: (_) {},
                     ),
                   ),
@@ -509,9 +506,9 @@ void _showDialog({
                     Navigator.of(context).pop();
 
                     await controller.searchAddress(
-                      fu: controllerFu.text,
-                      city: controllerCity.text,
-                      publicPlace: controllerPublicPlace.text,
+                      fu: controller.controllerFu.text,
+                      city: controller.controllerCity.text,
+                      publicPlace: controller.controllerPublicPlace.text,
                       context: context,
                     );
                   },

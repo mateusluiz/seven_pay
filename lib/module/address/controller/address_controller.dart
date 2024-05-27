@@ -11,8 +11,12 @@ class AddressController {
 
   final isLoading = false.obs;
 
-  final textControllerNeighborhood = TextEditingController();
-  final textControllerFu = TextEditingController();
+  final controllerFu = TextEditingController();
+  final controllerCity = TextEditingController();
+  final controllerPublicPlace = TextEditingController();
+
+  final controllerNeighborhoodFilter = TextEditingController();
+  final controllerFuFilter = TextEditingController();
 
   Future<void> searchAddress({
     required String fu,
