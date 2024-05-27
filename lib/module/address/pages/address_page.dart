@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:seven_pay/module/address/controller/address_controller.dart';
-import 'package:seven_pay/module/address/models/address_via_cep.dart';
 import 'package:seven_pay/shared/menu/menu.dart';
 import 'package:seven_pay/theme/app_theme.dart';
 
@@ -12,203 +11,12 @@ class AddressPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = AddressController();
 
-    final addressList = [
-      {
-        'cep': '91420-270',
-        'logradouro': 'Rua São Domingos',
-        'complemento': '',
-        'bairro': 'Bom Jesus',
-        'localidade': 'Porto Alegre',
-        'uf': 'RS',
-        'ibge': '4314902',
-        'gia': '',
-        'ddd': '51',
-        'siafi': '8801'
-      },
-      {
-        'cep': '91040-000',
-        'logradouro': 'Rua Domingos Rubbo',
-        'complemento': '',
-        'bairro': 'Cristo Redentor',
-        'localidade': 'Porto Alegre',
-        'uf': 'RS',
-        'ibge': '4314902',
-        'gia': '',
-        'ddd': '51',
-        'siafi': '8801'
-      },
-      {
-        'cep': '91040-320',
-        'logradouro': 'Rua Domingos Martins',
-        'complemento': '',
-        'bairro': 'Cristo Redentor',
-        'localidade': 'Porto Alegre',
-        'uf': 'RS',
-        'ibge': '4314902',
-        'gia': '',
-        'ddd': '51',
-        'siafi': '8801'
-      },
-      {
-        'cep': '91120-090',
-        'logradouro': 'Rua Domingos de Abreu',
-        'complemento': '',
-        'bairro': 'Sarandi',
-        'localidade': 'Porto Alegre',
-        'uf': 'RS',
-        'ibge': '4314902',
-        'gia': '',
-        'ddd': '51',
-        'siafi': '8801'
-      },
-      {
-        'cep': '91910-450',
-        'logradouro': 'Rua Domingos da Silva',
-        'complemento': '',
-        'bairro': 'Camaquã',
-        'localidade': 'Porto Alegre',
-        'uf': 'RS',
-        'ibge': '4314902',
-        'gia': '',
-        'ddd': '51',
-        'siafi': '8801'
-      },
-      {
-        'cep': '91360-040',
-        'logradouro': 'Rua Domingos Seguézio',
-        'complemento': '',
-        'bairro': 'Vila Ipiranga',
-        'localidade': 'Porto Alegre',
-        'uf': 'RS',
-        'ibge': '4314902',
-        'gia': '',
-        'ddd': '51',
-        'siafi': '8801'
-      },
-      {
-        'cep': '91790-072',
-        'logradouro': 'Rua Domingos José Poli',
-        'complemento': '',
-        'bairro': 'Restinga',
-        'localidade': 'Porto Alegre',
-        'uf': 'RS',
-        'ibge': '4314902',
-        'gia': '',
-        'ddd': '51',
-        'siafi': '8801'
-      },
-      {
-        'cep': '91160-080',
-        'logradouro': 'Rua Luiz Domingos Ramos',
-        'complemento': '',
-        'bairro': 'Santa Rosa de Lima',
-        'localidade': 'Porto Alegre',
-        'uf': 'RS',
-        'ibge': '4314902',
-        'gia': '',
-        'ddd': '51',
-        'siafi': '8801'
-      },
-      {
-        'cep': '90650-090',
-        'logradouro': 'Rua Domingos Crescêncio',
-        'complemento': '',
-        'bairro': 'Santana',
-        'localidade': 'Porto Alegre',
-        'uf': 'RS',
-        'ibge': '4314902',
-        'gia': '',
-        'ddd': '51',
-        'siafi': '8801'
-      },
-      {
-        'cep': '91910-420',
-        'logradouro': 'Rua José Domingos Varella',
-        'complemento': '',
-        'bairro': 'Cavalhada',
-        'localidade': 'Porto Alegre',
-        'uf': 'RS',
-        'ibge': '4314902',
-        'gia': '',
-        'ddd': '51',
-        'siafi': '8801'
-      },
-      {
-        'cep': '91261-304',
-        'logradouro': 'Rua Domingos Mullet Rodrigues',
-        'complemento': '',
-        'bairro': 'Mário Quintana',
-        'localidade': 'Porto Alegre',
-        'uf': 'RS',
-        'ibge': '4314902',
-        'gia': '',
-        'ddd': '51',
-        'siafi': '8801'
-      },
-      {
-        'cep': '90420-200',
-        'logradouro': 'Rua Domingos José de Almeida',
-        'complemento': '',
-        'bairro': 'Rio Branco',
-        'localidade': 'Porto Alegre',
-        'uf': 'RS',
-        'ibge': '4314902',
-        'gia': '',
-        'ddd': '51',
-        'siafi': '8801'
-      },
-      {
-        'cep': '91790-101',
-        'logradouro': 'Rua Domingos Manoel Mincarone',
-        'complemento': '',
-        'bairro': 'Restinga',
-        'localidade': 'Porto Alegre',
-        'uf': 'RS',
-        'ibge': '4314902',
-        'gia': '',
-        'ddd': '51',
-        'siafi': '8801'
-      },
-      {
-        'cep': '91120-480',
-        'logradouro': 'Rua Domingos Antônio Santoro',
-        'complemento': '',
-        'bairro': 'Sarandi',
-        'localidade': 'Porto Alegre',
-        'uf': 'RS',
-        'ibge': '4314902',
-        'gia': '',
-        'ddd': '51',
-        'siafi': '8801'
-      },
-      {
-        'cep': '91540-650',
-        'logradouro': 'Acesso Olavo Domingos de Oliveira',
-        'complemento': '',
-        'bairro': 'Jardim Carvalho',
-        'localidade': 'Porto Alegre',
-        'uf': 'RS',
-        'ibge': '4314902',
-        'gia': '',
-        'ddd': '51',
-        'siafi': '8801'
-      },
-      {
-        'cep': '91740-650',
-        'logradouro': 'Praça Domingos Fernandes de Souza',
-        'complemento': '',
-        'bairro': 'Cavalhada',
-        'localidade': 'Porto Alegre',
-        'uf': 'RS',
-        'ibge': '4314902',
-        'gia': '',
-        'ddd': '51',
-        'siafi': '8801'
-      }
-    ];
-
-    List<Address> addresses =
-        addressList.map((e) => Address.fromJson(e)).toList();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _showDialog(
+        context: context,
+        controller: controller,
+      );
+    });
 
     return Scaffold(
       body: Menu(
@@ -251,13 +59,29 @@ class AddressPage extends StatelessWidget {
               Row(
                 children: [
                   _InputText(
-                    labelText: 'CIDADE',
-                    controller: controller.textControllerCity,
+                    labelText: 'BAIRRO',
+                    controller: controller.textControllerNeighborhood,
+                    onChanged: (value) {
+                      controller.filterAddress(
+                        neighborhood:
+                            controller.textControllerNeighborhood.text,
+                        fu: controller.textControllerFu.text,
+                        context: context,
+                      );
+                    },
                   ),
                   const SizedBox(width: 30),
                   _InputText(
                     labelText: 'UF',
                     controller: controller.textControllerFu,
+                    onChanged: (value) {
+                      controller.filterAddress(
+                        neighborhood:
+                            controller.textControllerNeighborhood.text,
+                        fu: controller.textControllerFu.text,
+                        context: context,
+                      );
+                    },
                   ),
                 ],
               ),
@@ -265,11 +89,11 @@ class AddressPage extends StatelessWidget {
                 children: [
                   _Button(
                     text: 'FILTRAR',
-                    onTap: () async {
-                      await controller.searchAddress(
+                    onTap: () {
+                      controller.filterAddress(
+                        neighborhood:
+                            controller.textControllerNeighborhood.text,
                         fu: controller.textControllerFu.text,
-                        city: controller.textControllerCity.text,
-                        publicPlace: 'Domingos',
                         context: context,
                       );
                     },
@@ -278,7 +102,19 @@ class AddressPage extends StatelessWidget {
                   _Button(
                     text: 'ATUALIZAR',
                     paddingHorizontal: 14,
-                    onTap: () {},
+                    onTap: () {
+                      // await controller.searchAddress(
+                      //   fu: 'GO',
+                      //   city: 'Goiania',
+                      //   publicPlace: 'Domingos',
+                      //   context: context,
+                      // );
+
+                      _showDialog(
+                        context: context,
+                        controller: controller,
+                      );
+                    },
                   ),
                   const SizedBox(width: 12),
                   _Button(
@@ -381,7 +217,7 @@ class AddressPage extends StatelessWidget {
                                       ],
                                     ),
                                     if (addressIndex !=
-                                        addressList.length - 1) ...[
+                                        controller.addressList.length - 1) ...[
                                       const Divider(
                                         color: AppTheme.darkGreyOpacity,
                                         thickness: 2,
@@ -433,11 +269,13 @@ class AddressPage extends StatelessWidget {
 class _InputText extends StatelessWidget {
   final String labelText;
   final TextEditingController controller;
+  final void Function(String) onChanged;
 
   const _InputText({
     Key? key,
     required this.labelText,
     required this.controller,
+    required this.onChanged,
   }) : super(key: key);
 
   @override
@@ -447,6 +285,7 @@ class _InputText extends StatelessWidget {
       width: 180,
       child: TextFormField(
         controller: controller,
+        onChanged: onChanged,
         style: const TextStyle(
           fontSize: 14,
         ),
@@ -482,14 +321,16 @@ class _Button extends StatelessWidget {
   final String text;
   final VoidCallback onTap;
   final Icon? icon;
-  final double? paddingHorizontal;
+  final double paddingHorizontal;
+  final Color backgroundColor;
 
   const _Button({
     Key? key,
     required this.text,
     required this.onTap,
     this.icon,
-    this.paddingHorizontal,
+    this.paddingHorizontal = 30,
+    this.backgroundColor = AppTheme.darkGrey,
   }) : super(key: key);
 
   @override
@@ -498,7 +339,7 @@ class _Button extends StatelessWidget {
       onPressed: onTap,
       style: ButtonStyle(
         backgroundColor: MaterialStateProperty.all(
-          AppTheme.darkGrey,
+          backgroundColor,
         ),
         shape: MaterialStateProperty.all(
           RoundedRectangleBorder(
@@ -511,7 +352,7 @@ class _Button extends StatelessWidget {
       ),
       child: Padding(
         padding: EdgeInsets.symmetric(
-          horizontal: paddingHorizontal ?? 30,
+          horizontal: paddingHorizontal,
         ),
         child: SizedBox(
           height: 32,
@@ -585,4 +426,101 @@ class _BoxSpacing extends StatelessWidget {
       ),
     );
   }
+}
+
+void _showDialog({
+  required BuildContext context,
+  required AddressController controller,
+}) {
+  final controllerFu = TextEditingController();
+  final controllerCity = TextEditingController();
+  final controllerPublicPlace = TextEditingController();
+
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: const Center(
+          child: Text('Encontre um endereço'),
+        ),
+        content: SizedBox(
+          height: 120,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Row(
+                children: [
+                  Expanded(
+                    child: _InputText(
+                      labelText: 'UF',
+                      controller: controllerFu,
+                      onChanged: (_) {},
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 10),
+              Row(
+                children: [
+                  Expanded(
+                    child: _InputText(
+                      labelText: 'Cidade',
+                      controller: controllerCity,
+                      onChanged: (_) {},
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 10),
+              Row(
+                children: [
+                  Expanded(
+                    child: _InputText(
+                      labelText: 'Logradouro',
+                      controller: controllerPublicPlace,
+                      onChanged: (_) {},
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+        actions: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Expanded(
+                child: _Button(
+                  text: 'Fechar',
+                  paddingHorizontal: 40,
+                  backgroundColor: Colors.redAccent.shade100,
+                  onTap: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ),
+              const SizedBox(width: 20),
+              Expanded(
+                child: _Button(
+                  text: 'Buscar',
+                  paddingHorizontal: 40,
+                  onTap: () async {
+                    Navigator.of(context).pop();
+
+                    await controller.searchAddress(
+                      fu: controllerFu.text,
+                      city: controllerCity.text,
+                      publicPlace: controllerPublicPlace.text,
+                      context: context,
+                    );
+                  },
+                ),
+              ),
+            ],
+          )
+        ],
+      );
+    },
+  );
 }
