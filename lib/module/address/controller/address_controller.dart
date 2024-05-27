@@ -84,4 +84,13 @@ class AddressController {
     addressList.addAll(adresses);
     originalAddressList.addAll(adresses);
   }
+
+  void clearFields() {
+    controllerFu.clear();
+    controllerCity.clear();
+    controllerPublicPlace.clear();
+
+    controllerNeighborhoodFilter.clear();
+    controllerFuFilter.clear();
+  }
 }
