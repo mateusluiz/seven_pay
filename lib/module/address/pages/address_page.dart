@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:seven_pay/module/address/controller/address_controller.dart';
 import 'package:seven_pay/shared/menu/menu.dart';
 import 'package:seven_pay/theme/app_theme.dart';
@@ -262,32 +263,44 @@ class AddressPage extends StatelessWidget {
 
 class _InputText extends StatelessWidget {
   final String labelText;
+  final String? hintText;
   final TextEditingController controller;
+  final double inputHeight;
+
   final List<TextInputFormatter>? inputFormatters;
+  final TextInputType? keyboardType;
+  final String? Function(String?)? validator;
   final void Function(String) onChanged;
 
   const _InputText({
     Key? key,
     required this.labelText,
+    this.hintText,
     required this.controller,
+    this.inputHeight = 28,
     this.inputFormatters,
+    this.keyboardType,
+    this.validator,
     required this.onChanged,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 28,
+      height: inputHeight,
       width: 180,
       child: TextFormField(
         controller: controller,
         inputFormatters: inputFormatters,
+        validator: validator,
         onChanged: onChanged,
+        keyboardType: keyboardType,
         style: const TextStyle(
           fontSize: 14,
         ),
         decoration: InputDecoration(
           labelText: labelText,
+          hintText: hintText,
           labelStyle: const TextStyle(
             fontSize: 12,
           ),
@@ -305,6 +318,25 @@ class _InputText extends StatelessWidget {
             borderRadius: BorderRadius.circular(12),
             borderSide: const BorderSide(
               color: Colors.black,
+              width: 1.2,
+            ),
+          ),
+          errorStyle: const TextStyle(
+            fontSize: 10,
+            color: Colors.red,
+            height: 1.5,
+          ),
+          errorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide: const BorderSide(
+              color: Colors.red,
+              width: 1.2,
+            ),
+          ),
+          focusedErrorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide: const BorderSide(
+              color: Colors.red,
               width: 1.2,
             ),
           ),
@@ -429,55 +461,117 @@ void _showDialog({
   required BuildContext context,
   required AddressController controller,
 }) {
+  final formKey = GlobalKey<FormState>();
+
+  final RegExp regexLettersAccent = RegExp(r'[a-zA-ZáàâãéèêẽíìîĩóòôõúùûũçÇ]');
+  final Map<String, RegExp> filter = {'#': regexLettersAccent};
+
+  const double inputHeight = 60;
+
   showDialog(
     context: context,
     barrierDismissible: false,
     builder: (BuildContext context) {
       return AlertDialog(
         title: const Center(
-          child: Text('Encontre um endereço'),
+          child: Text(
+            'Encontre um endereço',
+          ),
         ),
         content: SizedBox(
-          height: 120,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Row(
-                children: [
-                  Expanded(
-                    child: _InputText(
-                      labelText: 'UF',
-                      controller: controller.controllerFu,
-                      onChanged: (_) {},
+          height: 200,
+          child: Form(
+            key: formKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Row(
+                  children: [
+                    Expanded(
+                      child: _InputText(
+                        labelText: 'UF',
+                        hintText: 'GO',
+                        controller: controller.controllerFu,
+                        keyboardType: TextInputType.text,
+                        inputHeight: inputHeight,
+                        inputFormatters: [
+                          MaskTextInputFormatter(
+                            mask: '##',
+                            filter: filter,
+                          ),
+                        ],
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'UF é obrigatório';
+                          }
+
+                          return null;
+                        },
+                        onChanged: (_) {},
+                      ),
                     ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 10),
-              Row(
-                children: [
-                  Expanded(
-                    child: _InputText(
-                      labelText: 'Cidade',
-                      controller: controller.controllerCity,
-                      onChanged: (_) {},
+                  ],
+                ),
+                const SizedBox(height: 10),
+                Row(
+                  children: [
+                    Expanded(
+                      child: _InputText(
+                        labelText: 'Cidade',
+                        hintText: 'Goiânia',
+                        controller: controller.controllerCity,
+                        keyboardType: TextInputType.text,
+                        inputHeight: inputHeight,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.allow(
+                            regexLettersAccent,
+                          ),
+                          LengthLimitingTextInputFormatter(30),
+                        ],
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Cidade é obrigatório';
+                          }
+
+                          return null;
+                        },
+                        onChanged: (_) {},
+                      ),
                     ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 10),
-              Row(
-                children: [
-                  Expanded(
-                    child: _InputText(
-                      labelText: 'Logradouro',
-                      controller: controller.controllerPublicPlace,
-                      onChanged: (_) {},
+                  ],
+                ),
+                const SizedBox(height: 10),
+                Row(
+                  children: [
+                    Expanded(
+                      child: _InputText(
+                        labelText: 'Logradouro',
+                        controller: controller.controllerPublicPlace,
+                        hintText: 'Domingos',
+                        keyboardType: TextInputType.text,
+                        inputHeight: inputHeight,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.allow(
+                            regexLettersAccent,
+                          ),
+                          LengthLimitingTextInputFormatter(30),
+                        ],
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Logradouro é obrigatório';
+                          } else if (value.length <= 2) {
+                            return 'Deve ter pelo menos 3 caracteres';
+                          }
+
+                          return null;
+                        },
+                        onChanged: (_) {},
+                      ),
                     ),
-                  ),
-                ],
-              ),
-            ],
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
         actions: [
@@ -500,14 +594,18 @@ void _showDialog({
                   text: 'Buscar',
                   paddingHorizontal: 40,
                   onTap: () async {
-                    Navigator.of(context).pop();
+                    if (formKey.currentState?.validate() ?? false) {
+                      Navigator.of(context).pop();
 
-                    await controller.searchAddress(
-                      fu: controller.controllerFu.text,
-                      city: controller.controllerCity.text,
-                      publicPlace: controller.controllerPublicPlace.text,
-                      context: context,
-                    );
+                      await controller.searchAddress(
+                        fu: controller.controllerFu.text,
+                        city: controller.controllerCity.text,
+                        publicPlace: controller.controllerPublicPlace.text,
+                        context: context,
+                      );
+
+                      controller.clearFields();
+                    }
                   },
                 ),
               ),
