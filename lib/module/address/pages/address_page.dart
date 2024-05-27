@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:seven_pay/module/address/controller/address_controller.dart';
 import 'package:seven_pay/shared/menu/menu.dart';
@@ -269,12 +270,14 @@ class AddressPage extends StatelessWidget {
 class _InputText extends StatelessWidget {
   final String labelText;
   final TextEditingController controller;
+  final List<TextInputFormatter>? inputFormatters;
   final void Function(String) onChanged;
 
   const _InputText({
     Key? key,
     required this.labelText,
     required this.controller,
+    this.inputFormatters,
     required this.onChanged,
   }) : super(key: key);
 
@@ -285,6 +288,7 @@ class _InputText extends StatelessWidget {
       width: 180,
       child: TextFormField(
         controller: controller,
+        inputFormatters: inputFormatters,
         onChanged: onChanged,
         style: const TextStyle(
           fontSize: 14,
