@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:seven_pay/module/address/controller/address_controller.dart';
 import 'package:seven_pay/module/address/models/address_via_cep.dart';
 import 'package:seven_pay/shared/menu/menu.dart';
 import 'package:seven_pay/theme/app_theme.dart';
@@ -8,6 +10,8 @@ class AddressPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = AddressController();
+
     final addressList = [
       {
         'cep': '91420-270',
@@ -245,17 +249,30 @@ class AddressPage extends StatelessWidget {
           _BoxSpacing(
             children: [
               Row(
-                children: const [
-                  _InputText(labelText: 'BAIRRO'),
-                  SizedBox(width: 30),
-                  _InputText(labelText: 'UF'),
+                children: [
+                  _InputText(
+                    labelText: 'CIDADE',
+                    controller: controller.textControllerCity,
+                  ),
+                  const SizedBox(width: 30),
+                  _InputText(
+                    labelText: 'UF',
+                    controller: controller.textControllerFu,
+                  ),
                 ],
               ),
               Row(
                 children: [
                   _Button(
                     text: 'FILTRAR',
-                    onTap: () {},
+                    onTap: () async {
+                      await controller.searchAddress(
+                        fu: controller.textControllerFu.text,
+                        city: controller.textControllerCity.text,
+                        publicPlace: 'Domingos',
+                        context: context,
+                      );
+                    },
                   ),
                   const SizedBox(width: 12),
                   _Button(
@@ -290,83 +307,92 @@ class AddressPage extends StatelessWidget {
               Expanded(
                 child: SizedBox(
                   height: MediaQuery.of(context).size.height * 0.4,
-                  child: ListView(
-                    children: [
-                      Table(
-                        border: TableBorder.symmetric(
-                          inside: BorderSide.none,
-                          outside: BorderSide.none,
-                        ),
-                        columnWidths: const {
-                          0: FixedColumnWidth(100.0),
-                          1: FlexColumnWidth(),
-                          2: FlexColumnWidth(),
-                          3: FixedColumnWidth(100.0),
-                          4: FixedColumnWidth(100.0),
-                          5: FixedColumnWidth(50.0),
-                          6: FixedColumnWidth(100.0),
-                          7: FixedColumnWidth(100.0),
-                        },
-                        children: [
-                          TableRow(
+                  child: Obx(() {
+                    return controller.isLoading.value
+                        ? const Center(child: CircularProgressIndicator())
+                        : ListView(
                             children: [
-                              _titleAddress(title: 'CEP'),
-                              _titleAddress(title: 'Logradouro'),
-                              _titleAddress(title: 'Complemento'),
-                              _titleAddress(title: 'Bairro'),
-                              _titleAddress(title: 'Localidade'),
-                              _titleAddress(title: 'UF'),
-                              _titleAddress(title: 'IBGE'),
-                              _titleAddress(title: 'Opçoes'),
-                            ],
-                          ),
-                        ],
-                      ),
-                      ...addresses.asMap().entries.map((addressMap) {
-                        final addressIndex = addressMap.key;
-                        final address = addressMap.value;
-
-                        return Column(
-                          children: [
-                            Table(
-                              columnWidths: const {
-                                0: FixedColumnWidth(100.0),
-                                1: FlexColumnWidth(),
-                                2: FlexColumnWidth(),
-                                3: FixedColumnWidth(100.0),
-                                4: FixedColumnWidth(100.0),
-                                5: FixedColumnWidth(50.0),
-                                6: FixedColumnWidth(100.0),
-                                7: FixedColumnWidth(100.0),
-                              },
-                              children: [
-                                TableRow(
-                                  children: [
-                                    _cellText(text: address.cep),
-                                    _cellText(text: address.logradouro),
-                                    _cellText(text: address.complemento),
-                                    _cellText(text: address.bairro),
-                                    _cellText(text: address.localidade),
-                                    _cellText(text: address.uf),
-                                    _cellText(text: address.ibge),
-                                    const Icon(
-                                      Icons.menu,
-                                    ),
-                                  ],
+                              Table(
+                                border: TableBorder.symmetric(
+                                  inside: BorderSide.none,
+                                  outside: BorderSide.none,
                                 ),
-                              ],
-                            ),
-                            if (addressIndex != addressList.length - 1) ...[
-                              const Divider(
-                                color: AppTheme.darkGreyOpacity,
-                                thickness: 2,
+                                columnWidths: const {
+                                  0: FixedColumnWidth(100.0),
+                                  1: FlexColumnWidth(),
+                                  2: FlexColumnWidth(),
+                                  3: FixedColumnWidth(100.0),
+                                  4: FixedColumnWidth(100.0),
+                                  5: FixedColumnWidth(50.0),
+                                  6: FixedColumnWidth(100.0),
+                                  7: FixedColumnWidth(100.0),
+                                },
+                                children: [
+                                  TableRow(
+                                    children: [
+                                      _titleAddress(title: 'CEP'),
+                                      _titleAddress(title: 'Logradouro'),
+                                      _titleAddress(title: 'Complemento'),
+                                      _titleAddress(title: 'Bairro'),
+                                      _titleAddress(title: 'Localidade'),
+                                      _titleAddress(title: 'UF'),
+                                      _titleAddress(title: 'IBGE'),
+                                      _titleAddress(title: 'Opções'),
+                                    ],
+                                  ),
+                                ],
                               ),
+                              ...controller.addressList
+                                  .asMap()
+                                  .entries
+                                  .map((addressMap) {
+                                final addressIndex = addressMap.key;
+                                final address = addressMap.value;
+
+                                return Column(
+                                  children: [
+                                    Table(
+                                      columnWidths: const {
+                                        0: FixedColumnWidth(100.0),
+                                        1: FlexColumnWidth(),
+                                        2: FlexColumnWidth(),
+                                        3: FixedColumnWidth(100.0),
+                                        4: FixedColumnWidth(100.0),
+                                        5: FixedColumnWidth(50.0),
+                                        6: FixedColumnWidth(100.0),
+                                        7: FixedColumnWidth(100.0),
+                                      },
+                                      children: [
+                                        TableRow(
+                                          children: [
+                                            _cellText(text: address.cep),
+                                            _cellText(text: address.logradouro),
+                                            _cellText(
+                                                text: address.complemento),
+                                            _cellText(text: address.bairro),
+                                            _cellText(text: address.localidade),
+                                            _cellText(text: address.uf),
+                                            _cellText(text: address.ibge),
+                                            const Icon(
+                                              Icons.menu,
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                    if (addressIndex !=
+                                        addressList.length - 1) ...[
+                                      const Divider(
+                                        color: AppTheme.darkGreyOpacity,
+                                        thickness: 2,
+                                      ),
+                                    ],
+                                  ],
+                                );
+                              }).toList(),
                             ],
-                          ],
-                        );
-                      }).toList(),
-                    ],
-                  ),
+                          );
+                  }),
                 ),
               ),
             ],
@@ -406,10 +432,12 @@ class AddressPage extends StatelessWidget {
 
 class _InputText extends StatelessWidget {
   final String labelText;
+  final TextEditingController controller;
 
   const _InputText({
     Key? key,
     required this.labelText,
+    required this.controller,
   }) : super(key: key);
 
   @override
@@ -418,6 +446,7 @@ class _InputText extends StatelessWidget {
       height: 28,
       width: 180,
       child: TextFormField(
+        controller: controller,
         style: const TextStyle(
           fontSize: 14,
         ),
