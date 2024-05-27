@@ -104,13 +104,6 @@ class AddressPage extends StatelessWidget {
                     text: 'ATUALIZAR',
                     paddingHorizontal: 14,
                     onTap: () {
-                      // await controller.searchAddress(
-                      //   fu: 'GO',
-                      //   city: 'Goiania',
-                      //   publicPlace: 'Domingos',
-                      //   context: context,
-                      // );
-
                       _showDialog(
                         context: context,
                         controller: controller,
