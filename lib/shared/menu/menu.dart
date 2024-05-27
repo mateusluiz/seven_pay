@@ -56,7 +56,7 @@ class Menu extends StatelessWidget {
                   const SizedBox(height: 40),
                   GestureDetector(
                     child: const Icon(
-                      Icons.home,
+                      Icons.menu,
                       color: iconColor,
                     ),
                   ),
@@ -129,17 +129,49 @@ class Menu extends StatelessWidget {
                     thickness: 1,
                   ),
                   const SizedBox(height: 20),
-                  GestureDetector(
-                    child: const Icon(
-                      Icons.home,
-                      color: iconColor,
+                  Padding(
+                    padding: const EdgeInsets.only(left: 10),
+                    child: GestureDetector(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: const [
+                          Icon(
+                            Icons.home,
+                            color: iconColor,
+                          ),
+                          SizedBox(width: 4),
+                          Text(
+                            'Get Help',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 12,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                   const SizedBox(height: 20),
-                  GestureDetector(
-                    child: const Icon(
-                      Icons.home,
-                      color: iconColor,
+                  Padding(
+                    padding: const EdgeInsets.only(left: 10),
+                    child: GestureDetector(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: const [
+                          Icon(
+                            Icons.home,
+                            color: iconColor,
+                          ),
+                          SizedBox(width: 4),
+                          Text(
+                            'Configurações',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 12,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                   const SizedBox(height: 20),
