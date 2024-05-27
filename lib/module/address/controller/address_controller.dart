@@ -7,10 +7,11 @@ import 'package:seven_pay/shared/show_snack_bar.dart';
 class AddressController {
   final _viaCepRepository = ViaCepRepository();
   final addressList = RxList<Address>([]);
+  final originalAddressList = RxList<Address>([]);
 
   final isLoading = false.obs;
 
-  final textControllerCity = TextEditingController();
+  final textControllerNeighborhood = TextEditingController();
   final textControllerFu = TextEditingController();
 
   Future<void> searchAddress({
@@ -22,15 +23,13 @@ class AddressController {
     try {
       isLoading.value = true;
 
-      addressList.clear();
-
       final adresses = await _viaCepRepository.searchAddress(
         fu: fu,
         city: city,
-        publicPlace: _isValidCharacter(publicPlace),
+        publicPlace: publicPlace,
       );
 
-      addressList.addAll(adresses);
+      _setAddress(adresses);
     } catch (e) {
       showSnackBar(
         context: context,
@@ -42,7 +41,43 @@ class AddressController {
     }
   }
 
-  String _isValidCharacter(String value) {
-    return value.length > 3 ? value : '    ';
+  void filterAddress({
+    required String neighborhood,
+    required String fu,
+    required BuildContext context,
+  }) async {
+    isLoading.value = true;
+
+    final isFilled = neighborhood.isNotEmpty || fu.isNotEmpty;
+
+    if (isFilled) {
+      final filteredAddresses = originalAddressList.where((address) {
+        final bairro = address.bairro.toLowerCase().trim();
+        final estado = address.uf.toLowerCase().trim();
+        final searchNeighborhood = neighborhood.toLowerCase().trim();
+        final searchFu = fu.toLowerCase().trim();
+
+        if (searchNeighborhood.isNotEmpty) {
+          return bairro.contains(searchNeighborhood);
+        } else if (searchFu.isNotEmpty) {
+          return estado.contains(searchFu);
+        }
+
+        return false;
+      }).toList();
+
+      addressList.clear();
+      addressList.addAll(filteredAddresses);
+    }
+
+    isLoading.value = false;
+  }
+
+  void _setAddress(List<Address> adresses) {
+    addressList.clear();
+    originalAddressList.clear();
+
+    addressList.addAll(adresses);
+    originalAddressList.addAll(adresses);
   }
 }
