@@ -525,34 +525,40 @@ class _BoxSpacingHeaderMobile extends StatelessWidget {
         Wrap(
           runSpacing: 12,
           children: [
-            Expanded(
-              child: _InputText(
-                labelText: 'BAIRRO',
-                controller: controller.controllerNeighborhoodFilter,
-                inputWidth: MediaQuery.of(context).size.width,
-                onChanged: (value) {
-                  controller.filterAddress(
-                    neighborhood: controller.controllerNeighborhoodFilter.text,
-                    fu: controller.controllerFuFilter.text,
-                    context: context,
-                  );
-                },
-              ),
-            ),
-            const SizedBox(width: 30),
-            Expanded(
-              child: _InputText(
-                labelText: 'UF',
-                controller: controller.controllerFuFilter,
-                inputWidth: MediaQuery.of(context).size.width,
-                onChanged: (value) {
-                  controller.filterAddress(
-                    neighborhood: controller.controllerNeighborhoodFilter.text,
-                    fu: controller.controllerFuFilter.text,
-                    context: context,
-                  );
-                },
-              ),
+            Row(
+              children: [
+                Expanded(
+                  child: _InputText(
+                    labelText: 'BAIRRO',
+                    controller: controller.controllerNeighborhoodFilter,
+                    inputWidth: MediaQuery.of(context).size.width,
+                    onChanged: (value) {
+                      controller.filterAddress(
+                        neighborhood:
+                            controller.controllerNeighborhoodFilter.text,
+                        fu: controller.controllerFuFilter.text,
+                        context: context,
+                      );
+                    },
+                  ),
+                ),
+                const SizedBox(width: 30),
+                Expanded(
+                  child: _InputText(
+                    labelText: 'UF',
+                    controller: controller.controllerFuFilter,
+                    inputWidth: MediaQuery.of(context).size.width,
+                    onChanged: (value) {
+                      controller.filterAddress(
+                        neighborhood:
+                            controller.controllerNeighborhoodFilter.text,
+                        fu: controller.controllerFuFilter.text,
+                        context: context,
+                      );
+                    },
+                  ),
+                ),
+              ],
             ),
             const SizedBox(height: 40),
           ],
