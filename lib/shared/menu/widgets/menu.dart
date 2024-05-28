@@ -66,14 +66,17 @@ class Menu extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           if (isMobile) ...[
-                            GestureDetector(
-                              onTap: () {
-                                _scaffoldKey.currentState?.openDrawer();
-                              },
-                              child: const Icon(
-                                Icons.menu,
-                                color: AppTheme.darkGrey,
-                                size: 30,
+                            MouseRegion(
+                              cursor: SystemMouseCursors.click,
+                              child: GestureDetector(
+                                onTap: () {
+                                  _scaffoldKey.currentState?.openDrawer();
+                                },
+                                child: const Icon(
+                                  Icons.menu,
+                                  color: AppTheme.darkGrey,
+                                  size: 30,
+                                ),
                               ),
                             ),
                             const SizedBox(width: 30),
