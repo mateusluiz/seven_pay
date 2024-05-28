@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:seven_pay/theme/appGallery/app_gallery.dart';
 import 'package:seven_pay/theme/app_theme.dart';
+import 'package:seven_pay/utils/helpers.dart';
 
 class Menu extends StatelessWidget {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -23,7 +24,7 @@ class Menu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const iconColor = Colors.white;
-    final size = MediaQuery.of(context).size;
+    final size = Helpers.getSizeScreen(context);
 
     final drawerWidth = size.width * 0.12;
     const double spacerIcon = 30;
@@ -233,7 +234,7 @@ class _MyDrawer extends StatelessWidget {
                 ),
                 const SizedBox(height: 40),
                 SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.5,
+                  height: Helpers.getSizeScreen(context).height * 0.5,
                   width: 200,
                   child: Center(
                     child: Wrap(

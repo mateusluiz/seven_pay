@@ -5,6 +5,7 @@ import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:seven_pay/module/address/controller/address_controller.dart';
 import 'package:seven_pay/shared/menu/widgets/menu.dart';
 import 'package:seven_pay/theme/app_theme.dart';
+import 'package:seven_pay/utils/helpers.dart';
 
 class AddressPage extends StatelessWidget {
   final controller = AddressController();
@@ -300,7 +301,7 @@ class _BoxSpacingWeb extends StatelessWidget {
       children: [
         Expanded(
           child: SizedBox(
-            height: MediaQuery.of(context).size.height * 0.4,
+            height: Helpers.getSizeScreen(context).height * 0.4,
             child: Obx(() {
               return controller.isLoading.value
                   ? const Center(child: CircularProgressIndicator())
@@ -409,7 +410,7 @@ class _BoxSpacingMobile extends StatelessWidget {
       children: [
         Expanded(
           child: SizedBox(
-            height: MediaQuery.of(context).size.height * 0.4,
+            height: Helpers.getSizeScreen(context).height * 0.4,
             child: Obx(() {
               return controller.isLoading.value
                   ? const Center(child: CircularProgressIndicator())
@@ -534,7 +535,7 @@ class _BoxSpacingHeaderMobile extends StatelessWidget {
                   child: _InputText(
                     labelText: 'BAIRRO',
                     controller: controller.controllerNeighborhoodFilter,
-                    inputWidth: MediaQuery.of(context).size.width,
+                    inputWidth: Helpers.getSizeScreen(context).width,
                     onChanged: (value) {
                       controller.filterAddress(
                         neighborhood:
@@ -550,7 +551,7 @@ class _BoxSpacingHeaderMobile extends StatelessWidget {
                   child: _InputText(
                     labelText: 'UF',
                     controller: controller.controllerFuFilter,
-                    inputWidth: MediaQuery.of(context).size.width,
+                    inputWidth: Helpers.getSizeScreen(context).width,
                     onChanged: (value) {
                       controller.filterAddress(
                         neighborhood:
