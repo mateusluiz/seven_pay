@@ -806,6 +806,8 @@ void _showDialog({
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Cidade é obrigatório';
+                          } else if (value.length <= 2) {
+                            return 'Deve ter pelo menos 3 caracteres';
                           }
 
                           return null;
