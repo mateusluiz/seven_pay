@@ -25,7 +25,7 @@ class AddressPage extends StatelessWidget {
 
     return Scaffold(
       body: LayoutBuilder(builder: (context, constraints) {
-        bool isMobile = constraints.maxWidth < 1000;
+        bool isMobile = constraints.maxWidth < 1120;
 
         return Menu(
           title: 'Olá João',
@@ -63,89 +63,9 @@ class AddressPage extends StatelessWidget {
                 ],
               ),
             ),
-            _BoxSpacing(
-              isMobile: isMobile,
-              paddingSide: 12,
-              children: [
-                Wrap(
-                  runSpacing: 12,
-                  children: [
-                    _InputText(
-                      labelText: 'BAIRRO',
-                      controller: controller.controllerNeighborhoodFilter,
-                      onChanged: (value) {
-                        controller.filterAddress(
-                          neighborhood:
-                              controller.controllerNeighborhoodFilter.text,
-                          fu: controller.controllerFuFilter.text,
-                          context: context,
-                        );
-                      },
-                    ),
-                    const SizedBox(width: 30),
-                    _InputText(
-                      labelText: 'UF',
-                      controller: controller.controllerFuFilter,
-                      onChanged: (value) {
-                        controller.filterAddress(
-                          neighborhood:
-                              controller.controllerNeighborhoodFilter.text,
-                          fu: controller.controllerFuFilter.text,
-                          context: context,
-                        );
-                      },
-                    ),
-                    if (isMobile) const SizedBox(height: 40),
-                  ],
-                ),
-                const SizedBox(width: 30),
-                Wrap(
-                  runSpacing: 12,
-                  children: [
-                    _Button(
-                      text: 'FILTRAR',
-                      onTap: () {
-                        controller.filterAddress(
-                          neighborhood:
-                              controller.controllerNeighborhoodFilter.text,
-                          fu: controller.controllerFuFilter.text,
-                          context: context,
-                        );
-                      },
-                    ),
-                    const SizedBox(width: 12),
-                    _Button(
-                      text: 'ATUALIZAR',
-                      paddingHorizontal: 14,
-                      onTap: () {
-                        _showDialog(
-                          context: context,
-                          controller: controller,
-                        );
-                      },
-                    ),
-                    const SizedBox(width: 12),
-                    _Button(
-                      text: 'CADASTRAR',
-                      paddingHorizontal: 10,
-                      onTap: () {},
-                      icon: const Icon(
-                        Icons.add_circle,
-                        size: 22,
-                        color: Colors.grey,
-                      ),
-                    ),
-                    const SizedBox(width: 40),
-                    Center(
-                      child: GestureDetector(
-                        onTap: () {},
-                        child: const Icon(Icons.download),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
+            isMobile
+                ? _BoxSpacingHeaderMobile(controller: controller)
+                : _BoxSpacingHeaderWeb(controller: controller),
             const SizedBox(height: 24),
             isMobile
                 ? _BoxSpacingMobile(controller: controller)
@@ -163,6 +83,7 @@ class _InputText extends StatelessWidget {
   final String? hintText;
   final TextEditingController controller;
   final double inputHeight;
+  final double inputWidth;
 
   final List<TextInputFormatter>? inputFormatters;
   final TextInputType? keyboardType;
@@ -175,6 +96,7 @@ class _InputText extends StatelessWidget {
     this.hintText,
     required this.controller,
     this.inputHeight = 28,
+    this.inputWidth = 180,
     this.inputFormatters,
     this.keyboardType,
     this.validator,
@@ -185,7 +107,7 @@ class _InputText extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: inputHeight,
-      width: 180,
+      width: inputWidth,
       child: TextFormField(
         controller: controller,
         inputFormatters: inputFormatters,
@@ -351,7 +273,10 @@ class _BoxSpacing extends StatelessWidget {
                       runSpacing: 8,
                       children: children,
                     )
-                  : Row(children: children),
+                  : Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: children,
+                    ),
             ),
           ),
         ],
@@ -577,6 +502,193 @@ class _BoxSpacingMobile extends StatelessWidget {
                     );
             }),
           ),
+        ),
+      ],
+    );
+  }
+}
+
+class _BoxSpacingHeaderMobile extends StatelessWidget {
+  final AddressController controller;
+
+  const _BoxSpacingHeaderMobile({
+    Key? key,
+    required this.controller,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return _BoxSpacing(
+      isMobile: true,
+      paddingSide: 12,
+      children: [
+        Wrap(
+          runSpacing: 12,
+          children: [
+            Expanded(
+              child: _InputText(
+                labelText: 'BAIRRO',
+                controller: controller.controllerNeighborhoodFilter,
+                inputWidth: MediaQuery.of(context).size.width,
+                onChanged: (value) {
+                  controller.filterAddress(
+                    neighborhood: controller.controllerNeighborhoodFilter.text,
+                    fu: controller.controllerFuFilter.text,
+                    context: context,
+                  );
+                },
+              ),
+            ),
+            const SizedBox(width: 30),
+            Expanded(
+              child: _InputText(
+                labelText: 'UF',
+                controller: controller.controllerFuFilter,
+                inputWidth: MediaQuery.of(context).size.width,
+                onChanged: (value) {
+                  controller.filterAddress(
+                    neighborhood: controller.controllerNeighborhoodFilter.text,
+                    fu: controller.controllerFuFilter.text,
+                    context: context,
+                  );
+                },
+              ),
+            ),
+            const SizedBox(height: 40),
+          ],
+        ),
+        const SizedBox(width: 30),
+        Wrap(
+          runSpacing: 12,
+          children: [
+            _Button(
+              text: 'FILTRAR',
+              onTap: () {
+                controller.filterAddress(
+                  neighborhood: controller.controllerNeighborhoodFilter.text,
+                  fu: controller.controllerFuFilter.text,
+                  context: context,
+                );
+              },
+            ),
+            const SizedBox(width: 12),
+            _Button(
+              text: 'ATUALIZAR',
+              paddingHorizontal: 14,
+              onTap: () {
+                _showDialog(
+                  context: context,
+                  controller: controller,
+                );
+              },
+            ),
+            const SizedBox(width: 12),
+            _Button(
+              text: 'CADASTRAR',
+              paddingHorizontal: 10,
+              onTap: () {},
+              icon: const Icon(
+                Icons.add_circle,
+                size: 22,
+                color: Colors.grey,
+              ),
+            ),
+            const SizedBox(width: 40),
+            Center(
+              child: GestureDetector(
+                onTap: () {},
+                child: const Icon(Icons.download),
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+}
+
+class _BoxSpacingHeaderWeb extends StatelessWidget {
+  final AddressController controller;
+
+  const _BoxSpacingHeaderWeb({
+    Key? key,
+    required this.controller,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return _BoxSpacing(
+      children: [
+        Row(
+          children: [
+            _InputText(
+              labelText: 'BAIRRO',
+              controller: controller.controllerNeighborhoodFilter,
+              onChanged: (value) {
+                controller.filterAddress(
+                  neighborhood: controller.controllerNeighborhoodFilter.text,
+                  fu: controller.controllerFuFilter.text,
+                  context: context,
+                );
+              },
+            ),
+            const SizedBox(width: 30),
+            _InputText(
+              labelText: 'UF',
+              controller: controller.controllerFuFilter,
+              onChanged: (value) {
+                controller.filterAddress(
+                  neighborhood: controller.controllerNeighborhoodFilter.text,
+                  fu: controller.controllerFuFilter.text,
+                  context: context,
+                );
+              },
+            ),
+            const SizedBox(width: 30),
+          ],
+        ),
+        Row(
+          children: [
+            _Button(
+              text: 'FILTRAR',
+              onTap: () {
+                controller.filterAddress(
+                  neighborhood: controller.controllerNeighborhoodFilter.text,
+                  fu: controller.controllerFuFilter.text,
+                  context: context,
+                );
+              },
+            ),
+            const SizedBox(width: 12),
+            _Button(
+              text: 'ATUALIZAR',
+              paddingHorizontal: 14,
+              onTap: () {
+                _showDialog(
+                  context: context,
+                  controller: controller,
+                );
+              },
+            ),
+            const SizedBox(width: 12),
+            _Button(
+              text: 'CADASTRAR',
+              paddingHorizontal: 10,
+              onTap: () {},
+              icon: const Icon(
+                Icons.add_circle,
+                size: 22,
+                color: Colors.grey,
+              ),
+            ),
+            const SizedBox(width: 40),
+            Center(
+              child: GestureDetector(
+                onTap: () {},
+                child: const Icon(Icons.download),
+              ),
+            ),
+          ],
         ),
       ],
     );
