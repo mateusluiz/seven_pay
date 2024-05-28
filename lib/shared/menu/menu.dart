@@ -187,7 +187,7 @@ class Menu extends StatelessWidget {
           children: [
             SizedBox(
               height: 100,
-              width: size.width - drawerWidth,
+              width: isMobile ? size.width : (size.width - drawerWidth),
               child: Column(
                 children: [
                   Padding(
