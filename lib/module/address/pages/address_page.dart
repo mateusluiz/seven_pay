@@ -414,90 +414,93 @@ class _BoxSpacingMobile extends StatelessWidget {
               return controller.isLoading.value
                   ? const Center(child: CircularProgressIndicator())
                   : SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: DataTable(
-                        columns: [
-                          DataColumn(
-                            label: _titleAddress(title: 'CEP'),
-                          ),
-                          DataColumn(
-                            label: _titleAddress(title: 'Logradouro'),
-                          ),
-                          DataColumn(
-                            label: _titleAddress(title: 'Complemento'),
-                          ),
-                          DataColumn(
-                            label: _titleAddress(title: 'Bairro'),
-                          ),
-                          DataColumn(
-                            label: _titleAddress(title: 'Localidade'),
-                          ),
-                          DataColumn(
-                            label: _titleAddress(title: 'UF'),
-                          ),
-                          DataColumn(
-                            label: _titleAddress(title: 'IBGE'),
-                          ),
-                          DataColumn(
-                            label: _titleAddress(title: 'Opções'),
-                          ),
-                        ],
-                        rows: controller.addressList
-                            .map(
-                              (address) => DataRow(
-                                cells: [
-                                  DataCell(
-                                    SizedBox(
-                                      width: 100,
-                                      child: Text(address.cep),
+                      scrollDirection: Axis.vertical,
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: DataTable(
+                          columns: [
+                            DataColumn(
+                              label: _titleAddress(title: 'CEP'),
+                            ),
+                            DataColumn(
+                              label: _titleAddress(title: 'Logradouro'),
+                            ),
+                            DataColumn(
+                              label: _titleAddress(title: 'Complemento'),
+                            ),
+                            DataColumn(
+                              label: _titleAddress(title: 'Bairro'),
+                            ),
+                            DataColumn(
+                              label: _titleAddress(title: 'Localidade'),
+                            ),
+                            DataColumn(
+                              label: _titleAddress(title: 'UF'),
+                            ),
+                            DataColumn(
+                              label: _titleAddress(title: 'IBGE'),
+                            ),
+                            DataColumn(
+                              label: _titleAddress(title: 'Opções'),
+                            ),
+                          ],
+                          rows: controller.addressList
+                              .map(
+                                (address) => DataRow(
+                                  cells: [
+                                    DataCell(
+                                      SizedBox(
+                                        width: 100,
+                                        child: Text(address.cep),
+                                      ),
                                     ),
-                                  ),
-                                  DataCell(
-                                    SizedBox(
-                                      width: 100,
-                                      child: Text(address.logradouro),
+                                    DataCell(
+                                      SizedBox(
+                                        width: 100,
+                                        child: Text(address.logradouro),
+                                      ),
                                     ),
-                                  ),
-                                  DataCell(
-                                    SizedBox(
-                                      width: 100,
-                                      child: Text(address.complemento),
+                                    DataCell(
+                                      SizedBox(
+                                        width: 100,
+                                        child: Text(address.complemento),
+                                      ),
                                     ),
-                                  ),
-                                  DataCell(
-                                    SizedBox(
-                                      width: 100,
-                                      child: Text(address.bairro),
+                                    DataCell(
+                                      SizedBox(
+                                        width: 100,
+                                        child: Text(address.bairro),
+                                      ),
                                     ),
-                                  ),
-                                  DataCell(
-                                    SizedBox(
-                                      width: 100,
-                                      child: Text(address.localidade),
+                                    DataCell(
+                                      SizedBox(
+                                        width: 100,
+                                        child: Text(address.localidade),
+                                      ),
                                     ),
-                                  ),
-                                  DataCell(
-                                    SizedBox(
-                                      width: 50,
-                                      child: Text(address.uf),
+                                    DataCell(
+                                      SizedBox(
+                                        width: 50,
+                                        child: Text(address.uf),
+                                      ),
                                     ),
-                                  ),
-                                  DataCell(
-                                    SizedBox(
-                                      width: 100,
-                                      child: Text(address.ibge),
+                                    DataCell(
+                                      SizedBox(
+                                        width: 100,
+                                        child: Text(address.ibge),
+                                      ),
                                     ),
-                                  ),
-                                  const DataCell(
-                                    SizedBox(
-                                      width: 100,
-                                      child: Icon(Icons.menu),
+                                    const DataCell(
+                                      SizedBox(
+                                        width: 100,
+                                        child: Icon(Icons.menu),
+                                      ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                            )
-                            .toList(),
+                                  ],
+                                ),
+                              )
+                              .toList(),
+                        ),
                       ),
                     );
             }),
