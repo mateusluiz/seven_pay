@@ -33,12 +33,13 @@ class Menu extends StatelessWidget {
       drawer: isMobile
           ? Drawer(
               child: ListView(
-                children: const [
+                children: [
                   _MyDrawer(
                     drawerWidth: 0,
+                    drawerHeigth: size.height,
                     iconColor: iconColor,
                     spacerIcon: spacerIcon,
-                  )
+                  ),
                 ],
               ),
             )
@@ -178,12 +179,15 @@ class Menu extends StatelessWidget {
 
 class _MyDrawer extends StatelessWidget {
   final double drawerWidth;
+  final double? drawerHeigth;
+
   final Color iconColor;
   final double spacerIcon;
 
   const _MyDrawer({
     Key? key,
     required this.drawerWidth,
+    this.drawerHeigth,
     required this.iconColor,
     required this.spacerIcon,
   }) : super(key: key);
@@ -194,6 +198,7 @@ class _MyDrawer extends StatelessWidget {
       child: Container(
         width: drawerWidth,
         color: AppTheme.darkGrey,
+        height: drawerHeigth,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -227,64 +232,121 @@ class _MyDrawer extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 40),
-                Column(
-                  children: [
-                    GestureDetector(
-                      child: Icon(
-                        Icons.home,
-                        color: iconColor,
-                      ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.5,
+                  width: 200,
+                  child: Center(
+                    child: Wrap(
+                      alignment: WrapAlignment.start,
+                      direction: Axis.vertical,
+                      runSpacing: 40,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 0,
+                            vertical: 0,
+                          ),
+                          child: GestureDetector(
+                            child: Icon(
+                              Icons.home,
+                              color: iconColor,
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: spacerIcon),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 0,
+                            vertical: 0,
+                          ),
+                          child: GestureDetector(
+                            child: Icon(
+                              Icons.home,
+                              color: iconColor,
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: spacerIcon),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 0,
+                            vertical: 0,
+                          ),
+                          child: GestureDetector(
+                            child: Icon(
+                              Icons.home,
+                              color: iconColor,
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: spacerIcon),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 0,
+                            vertical: 0,
+                          ),
+                          child: GestureDetector(
+                            child: Icon(
+                              Icons.home,
+                              color: iconColor,
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: spacerIcon),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 0,
+                            vertical: 0,
+                          ),
+                          child: GestureDetector(
+                            child: Icon(
+                              Icons.home,
+                              color: iconColor,
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: spacerIcon),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 0,
+                            vertical: 0,
+                          ),
+                          child: GestureDetector(
+                            child: Icon(
+                              Icons.home,
+                              color: iconColor,
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: spacerIcon),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 0,
+                            vertical: 0,
+                          ),
+                          child: GestureDetector(
+                            child: Icon(
+                              Icons.home,
+                              color: iconColor,
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: spacerIcon),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 0,
+                            vertical: 0,
+                          ),
+                          child: GestureDetector(
+                            child: Icon(
+                              Icons.home,
+                              color: iconColor,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                    SizedBox(height: spacerIcon),
-                    GestureDetector(
-                      child: Icon(
-                        Icons.home,
-                        color: iconColor,
-                      ),
-                    ),
-                    SizedBox(height: spacerIcon),
-                    GestureDetector(
-                      child: Icon(
-                        Icons.home,
-                        color: iconColor,
-                      ),
-                    ),
-                    SizedBox(height: spacerIcon),
-                    GestureDetector(
-                      child: Icon(
-                        Icons.home,
-                        color: iconColor,
-                      ),
-                    ),
-                    SizedBox(height: spacerIcon),
-                    GestureDetector(
-                      child: Icon(
-                        Icons.home,
-                        color: iconColor,
-                      ),
-                    ),
-                    SizedBox(height: spacerIcon),
-                    GestureDetector(
-                      child: Icon(
-                        Icons.home,
-                        color: iconColor,
-                      ),
-                    ),
-                    SizedBox(height: spacerIcon),
-                    GestureDetector(
-                      child: Icon(
-                        Icons.home,
-                        color: iconColor,
-                      ),
-                    ),
-                    SizedBox(height: spacerIcon),
-                    GestureDetector(
-                      child: Icon(
-                        Icons.home,
-                        color: iconColor,
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
               ],
             ),
