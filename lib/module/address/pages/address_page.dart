@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:seven_pay/module/address/controller/address_controller.dart';
-import 'package:seven_pay/shared/menu/menu.dart';
+import 'package:seven_pay/shared/menu/widgets/menu.dart';
 import 'package:seven_pay/theme/app_theme.dart';
 
 class AddressPage extends StatelessWidget {
@@ -569,6 +569,7 @@ class _BoxSpacingHeaderMobile extends StatelessWidget {
           children: [
             _Button(
               text: 'FILTRAR',
+              paddingHorizontal: 10,
               onTap: () {
                 controller.filterAddress(
                   neighborhood: controller.controllerNeighborhoodFilter.text,
