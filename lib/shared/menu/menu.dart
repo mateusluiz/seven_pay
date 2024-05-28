@@ -28,159 +28,161 @@ class Menu extends StatelessWidget {
 
     return Row(
       children: [
-        Container(
-          width: isMobile ? 0 : drawerWidth,
-          color: AppTheme.darkGrey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
-                children: [
-                  SizedBox(
-                    height: 75,
-                    child: DrawerHeader(
-                      margin: const EdgeInsets.symmetric(
-                        horizontal: 20,
-                      ),
-                      padding: EdgeInsets.zero,
-                      decoration: const BoxDecoration(
-                        border: Border(
-                          bottom: BorderSide(
-                            color: Colors.grey,
+        Expanded(
+          child: Container(
+            width: isMobile ? 0 : drawerWidth,
+            color: AppTheme.darkGrey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  children: [
+                    SizedBox(
+                      height: 75,
+                      child: DrawerHeader(
+                        margin: const EdgeInsets.symmetric(
+                          horizontal: 20,
+                        ),
+                        padding: EdgeInsets.zero,
+                        decoration: const BoxDecoration(
+                          border: Border(
+                            bottom: BorderSide(
+                              color: Colors.grey,
+                            ),
                           ),
                         ),
-                      ),
-                      child: Image.asset(
-                        AppGallery.png.sevenPayLogo,
+                        child: Image.asset(
+                          AppGallery.png.sevenPayLogo,
+                        ),
                       ),
                     ),
-                  ),
-                  const SizedBox(height: 40),
-                  GestureDetector(
-                    child: const Icon(
-                      Icons.menu,
-                      color: iconColor,
+                    const SizedBox(height: 40),
+                    GestureDetector(
+                      child: const Icon(
+                        Icons.menu,
+                        color: iconColor,
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 40),
-                  Column(
-                    children: [
-                      GestureDetector(
-                        child: const Icon(
-                          Icons.home,
-                          color: iconColor,
-                        ),
-                      ),
-                      const SizedBox(height: spacerIcon),
-                      GestureDetector(
-                        child: const Icon(
-                          Icons.home,
-                          color: iconColor,
-                        ),
-                      ),
-                      const SizedBox(height: spacerIcon),
-                      GestureDetector(
-                        child: const Icon(
-                          Icons.home,
-                          color: iconColor,
-                        ),
-                      ),
-                      const SizedBox(height: spacerIcon),
-                      GestureDetector(
-                        child: const Icon(
-                          Icons.home,
-                          color: iconColor,
-                        ),
-                      ),
-                      const SizedBox(height: spacerIcon),
-                      GestureDetector(
-                        child: const Icon(
-                          Icons.home,
-                          color: iconColor,
-                        ),
-                      ),
-                      const SizedBox(height: spacerIcon),
-                      GestureDetector(
-                        child: const Icon(
-                          Icons.home,
-                          color: iconColor,
-                        ),
-                      ),
-                      const SizedBox(height: spacerIcon),
-                      GestureDetector(
-                        child: const Icon(
-                          Icons.home,
-                          color: iconColor,
-                        ),
-                      ),
-                      const SizedBox(height: spacerIcon),
-                      GestureDetector(
-                        child: const Icon(
-                          Icons.home,
-                          color: iconColor,
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-              Column(
-                children: [
-                  const Divider(
-                    color: Colors.grey,
-                    thickness: 1,
-                  ),
-                  const SizedBox(height: 20),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 10),
-                    child: GestureDetector(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: const [
-                          Icon(
+                    const SizedBox(height: 40),
+                    Column(
+                      children: [
+                        GestureDetector(
+                          child: const Icon(
                             Icons.home,
                             color: iconColor,
                           ),
-                          SizedBox(width: 4),
-                          Text(
-                            'Get Help',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 12,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 10),
-                    child: GestureDetector(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: const [
-                          Icon(
+                        ),
+                        const SizedBox(height: spacerIcon),
+                        GestureDetector(
+                          child: const Icon(
                             Icons.home,
                             color: iconColor,
                           ),
-                          SizedBox(width: 4),
-                          Text(
-                            'Configurações',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 12,
-                            ),
+                        ),
+                        const SizedBox(height: spacerIcon),
+                        GestureDetector(
+                          child: const Icon(
+                            Icons.home,
+                            color: iconColor,
                           ),
-                        ],
+                        ),
+                        const SizedBox(height: spacerIcon),
+                        GestureDetector(
+                          child: const Icon(
+                            Icons.home,
+                            color: iconColor,
+                          ),
+                        ),
+                        const SizedBox(height: spacerIcon),
+                        GestureDetector(
+                          child: const Icon(
+                            Icons.home,
+                            color: iconColor,
+                          ),
+                        ),
+                        const SizedBox(height: spacerIcon),
+                        GestureDetector(
+                          child: const Icon(
+                            Icons.home,
+                            color: iconColor,
+                          ),
+                        ),
+                        const SizedBox(height: spacerIcon),
+                        GestureDetector(
+                          child: const Icon(
+                            Icons.home,
+                            color: iconColor,
+                          ),
+                        ),
+                        const SizedBox(height: spacerIcon),
+                        GestureDetector(
+                          child: const Icon(
+                            Icons.home,
+                            color: iconColor,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                Column(
+                  children: [
+                    const Divider(
+                      color: Colors.grey,
+                      thickness: 1,
+                    ),
+                    const SizedBox(height: 20),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 10),
+                      child: GestureDetector(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: const [
+                            Icon(
+                              Icons.home,
+                              color: iconColor,
+                            ),
+                            SizedBox(width: 4),
+                            Text(
+                              'Get Help',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 12,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                  const SizedBox(height: 20),
-                ],
-              ),
-            ],
+                    const SizedBox(height: 20),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 10),
+                      child: GestureDetector(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: const [
+                            Icon(
+                              Icons.home,
+                              color: iconColor,
+                            ),
+                            SizedBox(width: 4),
+                            Text(
+                              'Configurações',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 12,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
         Column(
@@ -191,33 +193,35 @@ class Menu extends StatelessWidget {
               child: Column(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 40,
+                    padding: EdgeInsets.symmetric(
+                      horizontal: isMobile ? 20 : 40,
                       vertical: 10,
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              title,
-                              style: const TextStyle(
-                                fontSize: 24,
-                                fontWeight: FontWeight.bold,
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                title,
+                                style: const TextStyle(
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
-                            ),
-                            const SizedBox(height: 6),
-                            Text(
-                              description,
-                              style: const TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.normal,
-                                color: AppTheme.darkGreyOpacity,
+                              const SizedBox(height: 6),
+                              Text(
+                                description,
+                                style: const TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.normal,
+                                  color: AppTheme.darkGreyOpacity,
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                         Row(
                           children: [
