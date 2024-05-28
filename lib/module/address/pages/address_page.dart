@@ -7,17 +7,20 @@ import 'package:seven_pay/shared/menu/menu.dart';
 import 'package:seven_pay/theme/app_theme.dart';
 
 class AddressPage extends StatelessWidget {
-  const AddressPage({Key? key}) : super(key: key);
+  final controller = AddressController();
+
+  AddressPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final controller = AddressController();
-
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      _showDialog(
-        context: context,
-        controller: controller,
-      );
+      if (!controller.isDialogShown.value) {
+        _showDialog(
+          context: context,
+          controller: controller,
+        );
+        controller.isDialogShown.value = true;
+      }
     });
 
     return Scaffold(

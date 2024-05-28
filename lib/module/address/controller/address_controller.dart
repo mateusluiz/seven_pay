@@ -18,6 +18,8 @@ class AddressController {
   final controllerNeighborhoodFilter = TextEditingController();
   final controllerFuFilter = TextEditingController();
 
+  final isDialogShown = false.obs;
+
   Future<void> searchAddress({
     required String fu,
     required String city,
