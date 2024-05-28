@@ -3,6 +3,8 @@ import 'package:seven_pay/theme/appGallery/app_gallery.dart';
 import 'package:seven_pay/theme/app_theme.dart';
 
 class Menu extends StatelessWidget {
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
+
   final String title;
   final String description;
 
@@ -10,7 +12,7 @@ class Menu extends StatelessWidget {
 
   final bool isMobile;
 
-  const Menu({
+  Menu({
     Key? key,
     required this.title,
     required this.description,
@@ -27,6 +29,7 @@ class Menu extends StatelessWidget {
     const double spacerIcon = 30;
 
     return Scaffold(
+      key: _scaffoldKey,
       drawer: isMobile
           ? Drawer(
               child: ListView(
@@ -64,6 +67,9 @@ class Menu extends StatelessWidget {
                         children: [
                           if (isMobile) ...[
                             GestureDetector(
+                              onTap: () {
+                                _scaffoldKey.currentState?.openDrawer();
+                              },
                               child: const Icon(
                                 Icons.menu,
                                 color: AppTheme.darkGrey,
