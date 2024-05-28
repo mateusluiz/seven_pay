@@ -8,11 +8,14 @@ class Menu extends StatelessWidget {
 
   final List<Widget> children;
 
+  final bool isMobile;
+
   const Menu({
     Key? key,
     required this.title,
     required this.description,
     required this.children,
+    this.isMobile = false,
   }) : super(key: key);
 
   @override
@@ -26,7 +29,7 @@ class Menu extends StatelessWidget {
     return Row(
       children: [
         Container(
-          width: drawerWidth,
+          width: isMobile ? 0 : drawerWidth,
           color: AppTheme.darkGrey,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -267,11 +270,15 @@ class Menu extends StatelessWidget {
             ),
             Expanded(
               child: SizedBox(
-                width: size.width - drawerWidth,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                width: isMobile ? size.width : (size.width - drawerWidth),
+                child: ListView(
                   children: [
-                    ...children,
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        ...children,
+                      ],
+                    ),
                   ],
                 ),
               ),
