@@ -2,33 +2,88 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "seven_pay (PROD)",
+            "name": "seven_pay (Mobx) (PROD)",
             "program": "lib/main_prod.dart",
             "request": "launch",
             "type": "dart",
+            "args": [
+                "--dart-define",
+                "TYPE_STATE=mobx",
+            ]
         },
         {
-            "name": "seven_pay (DEV)",
+            "name": "seven_pay (Getx) (PROD)",
+            "program": "lib/main_prod.dart",
+            "request": "launch",
+            "type": "dart",
+            "args": [
+                "--dart-define",
+                "TYPE_STATE=getx",
+            ]
+        },
+        {
+            "name": "seven_pay (Mobx) (DEV)",
             "program": "lib/main_dev.dart",
             "request": "launch",
             "type": "dart",
-            "flutterMode": "profile"
+            "args": [
+                "--dart-define",
+                "TYPE_STATE=mobx",
+            ]
         },
         {
-            "name": "seven_pay (PROFILE)",
-            "program": "lib/main_prod.dart",
-
+            "name": "seven_pay (Getx) (DEV)",
+            "program": "lib/main_dev.dart",
             "request": "launch",
             "type": "dart",
-            "flutterMode": "profile"
+            "args": [
+                "--dart-define",
+                "TYPE_STATE=getx",
+            ]
         },
         {
-            "name": "seven_pay (RELEASE)",
+            "name": "seven_pay (Mobx) (PROFILE)",
             "program": "lib/main_prod.dart",
-
             "request": "launch",
             "type": "dart",
-            "flutterMode": "release"
+            "flutterMode": "profile",
+            "args": [
+                "--dart-define",
+                "TYPE_STATE=mobx",
+            ]
+        },
+        {
+            "name": "seven_pay (Getx) (PROFILE)",
+            "program": "lib/main_prod.dart",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile",
+            "args": [
+                "--dart-define",
+                "TYPE_STATE=getx",
+            ]
+        },
+        {
+            "name": "seven_pay (Mobx) (RELEASE)",
+            "program": "lib/main_prod.dart",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release",
+            "args": [
+                "--dart-define",
+                "TYPE_STATE=mobx",
+            ]
+        },
+        {
+            "name": "seven_pay (Getx) (RELEASE)",
+            "program": "lib/main_prod.dart",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release",
+            "args": [
+                "--dart-define",
+                "TYPE_STATE=getx",
+            ]
         }
     ]
 }
