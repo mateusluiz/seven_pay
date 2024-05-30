@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:seven_pay/module/address/controller/address_controller.dart';
 import 'package:seven_pay/shared/menu/widgets/menu.dart';
@@ -15,12 +14,12 @@ class AddressPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (!controller.isDialogShown.value) {
+      if (!controller.addressState.isDialogShow) {
         _showDialog(
           context: context,
           controller: controller,
         );
-        controller.isDialogShown.value = true;
+        controller.addressState.isDialogShow = true;
       }
     });
 
@@ -302,91 +301,94 @@ class _BoxSpacingWeb extends StatelessWidget {
         Expanded(
           child: SizedBox(
             height: Helpers.getSizeScreen(context).height * 0.4,
-            child: Obx(() {
-              return controller.isLoading.value
-                  ? const Center(child: CircularProgressIndicator())
-                  : ListView(
-                      children: [
-                        Table(
-                          border: TableBorder.symmetric(
-                            inside: BorderSide.none,
-                            outside: BorderSide.none,
-                          ),
-                          columnWidths: const {
-                            0: FixedColumnWidth(100.0),
-                            1: FlexColumnWidth(),
-                            2: FlexColumnWidth(),
-                            3: FixedColumnWidth(100.0),
-                            4: FixedColumnWidth(100.0),
-                            5: FixedColumnWidth(50.0),
-                            6: FixedColumnWidth(100.0),
-                            7: FixedColumnWidth(100.0),
-                          },
-                          children: [
-                            TableRow(
-                              children: [
-                                _titleAddress(title: 'CEP'),
-                                _titleAddress(title: 'Logradouro'),
-                                _titleAddress(title: 'Complemento'),
-                                _titleAddress(title: 'Bairro'),
-                                _titleAddress(title: 'Localidade'),
-                                _titleAddress(title: 'UF'),
-                                _titleAddress(title: 'IBGE'),
-                                _titleAddress(title: 'Opções'),
-                              ],
+            child: controller.addressState.observerState(
+              () {
+                return controller.addressState.isLoading
+                    ? const Center(child: CircularProgressIndicator())
+                    : ListView(
+                        children: [
+                          Table(
+                            border: TableBorder.symmetric(
+                              inside: BorderSide.none,
+                              outside: BorderSide.none,
                             ),
-                          ],
-                        ),
-                        ...controller.addressList
-                            .asMap()
-                            .entries
-                            .map((addressMap) {
-                          final addressIndex = addressMap.key;
-                          final address = addressMap.value;
-
-                          return Column(
+                            columnWidths: const {
+                              0: FixedColumnWidth(100.0),
+                              1: FlexColumnWidth(),
+                              2: FlexColumnWidth(),
+                              3: FixedColumnWidth(100.0),
+                              4: FixedColumnWidth(100.0),
+                              5: FixedColumnWidth(50.0),
+                              6: FixedColumnWidth(100.0),
+                              7: FixedColumnWidth(100.0),
+                            },
                             children: [
-                              Table(
-                                columnWidths: const {
-                                  0: FixedColumnWidth(100.0),
-                                  1: FlexColumnWidth(),
-                                  2: FlexColumnWidth(),
-                                  3: FixedColumnWidth(100.0),
-                                  4: FixedColumnWidth(100.0),
-                                  5: FixedColumnWidth(50.0),
-                                  6: FixedColumnWidth(100.0),
-                                  7: FixedColumnWidth(100.0),
-                                },
+                              TableRow(
                                 children: [
-                                  TableRow(
-                                    children: [
-                                      _cellText(text: address.cep),
-                                      _cellText(text: address.logradouro),
-                                      _cellText(text: address.complemento),
-                                      _cellText(text: address.bairro),
-                                      _cellText(text: address.localidade),
-                                      _cellText(text: address.uf),
-                                      _cellText(text: address.ibge),
-                                      const Icon(
-                                        Icons.menu,
-                                      ),
-                                    ],
-                                  ),
+                                  _titleAddress(title: 'CEP'),
+                                  _titleAddress(title: 'Logradouro'),
+                                  _titleAddress(title: 'Complemento'),
+                                  _titleAddress(title: 'Bairro'),
+                                  _titleAddress(title: 'Localidade'),
+                                  _titleAddress(title: 'UF'),
+                                  _titleAddress(title: 'IBGE'),
+                                  _titleAddress(title: 'Opções'),
                                 ],
                               ),
-                              if (addressIndex !=
-                                  controller.addressList.length - 1) ...[
-                                const Divider(
-                                  color: AppTheme.darkGreyOpacity,
-                                  thickness: 2,
-                                ),
-                              ],
                             ],
-                          );
-                        }).toList(),
-                      ],
-                    );
-            }),
+                          ),
+                          ...controller.addressState.addressList
+                              .asMap()
+                              .entries
+                              .map((addressMap) {
+                            final addressIndex = addressMap.key;
+                            final address = addressMap.value;
+
+                            return Column(
+                              children: [
+                                Table(
+                                  columnWidths: const {
+                                    0: FixedColumnWidth(100.0),
+                                    1: FlexColumnWidth(),
+                                    2: FlexColumnWidth(),
+                                    3: FixedColumnWidth(100.0),
+                                    4: FixedColumnWidth(100.0),
+                                    5: FixedColumnWidth(50.0),
+                                    6: FixedColumnWidth(100.0),
+                                    7: FixedColumnWidth(100.0),
+                                  },
+                                  children: [
+                                    TableRow(
+                                      children: [
+                                        _cellText(text: address.cep),
+                                        _cellText(text: address.logradouro),
+                                        _cellText(text: address.complemento),
+                                        _cellText(text: address.bairro),
+                                        _cellText(text: address.localidade),
+                                        _cellText(text: address.uf),
+                                        _cellText(text: address.ibge),
+                                        const Icon(
+                                          Icons.menu,
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                                if (addressIndex !=
+                                    controller.addressState.addressList.length -
+                                        1) ...[
+                                  const Divider(
+                                    color: AppTheme.darkGreyOpacity,
+                                    thickness: 2,
+                                  ),
+                                ],
+                              ],
+                            );
+                          }).toList(),
+                        ],
+                      );
+              },
+            ),
           ),
         ),
       ],
@@ -411,100 +413,102 @@ class _BoxSpacingMobile extends StatelessWidget {
         Expanded(
           child: SizedBox(
             height: Helpers.getSizeScreen(context).height * 0.4,
-            child: Obx(() {
-              return controller.isLoading.value
-                  ? const Center(child: CircularProgressIndicator())
-                  : SingleChildScrollView(
-                      scrollDirection: Axis.vertical,
-                      child: SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: DataTable(
-                          columns: [
-                            DataColumn(
-                              label: _titleAddress(title: 'CEP'),
-                            ),
-                            DataColumn(
-                              label: _titleAddress(title: 'Logradouro'),
-                            ),
-                            DataColumn(
-                              label: _titleAddress(title: 'Complemento'),
-                            ),
-                            DataColumn(
-                              label: _titleAddress(title: 'Bairro'),
-                            ),
-                            DataColumn(
-                              label: _titleAddress(title: 'Localidade'),
-                            ),
-                            DataColumn(
-                              label: _titleAddress(title: 'UF'),
-                            ),
-                            DataColumn(
-                              label: _titleAddress(title: 'IBGE'),
-                            ),
-                            DataColumn(
-                              label: _titleAddress(title: 'Opções'),
-                            ),
-                          ],
-                          rows: controller.addressList
-                              .map(
-                                (address) => DataRow(
-                                  cells: [
-                                    DataCell(
-                                      SizedBox(
-                                        width: 100,
-                                        child: Text(address.cep),
+            child: controller.addressState.observerState(
+              () {
+                return controller.addressState.isLoading
+                    ? const Center(child: CircularProgressIndicator())
+                    : SingleChildScrollView(
+                        scrollDirection: Axis.vertical,
+                        child: SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: DataTable(
+                            columns: [
+                              DataColumn(
+                                label: _titleAddress(title: 'CEP'),
+                              ),
+                              DataColumn(
+                                label: _titleAddress(title: 'Logradouro'),
+                              ),
+                              DataColumn(
+                                label: _titleAddress(title: 'Complemento'),
+                              ),
+                              DataColumn(
+                                label: _titleAddress(title: 'Bairro'),
+                              ),
+                              DataColumn(
+                                label: _titleAddress(title: 'Localidade'),
+                              ),
+                              DataColumn(
+                                label: _titleAddress(title: 'UF'),
+                              ),
+                              DataColumn(
+                                label: _titleAddress(title: 'IBGE'),
+                              ),
+                              DataColumn(
+                                label: _titleAddress(title: 'Opções'),
+                              ),
+                            ],
+                            rows: controller.addressState.addressList
+                                .map(
+                                  (address) => DataRow(
+                                    cells: [
+                                      DataCell(
+                                        SizedBox(
+                                          width: 100,
+                                          child: Text(address.cep),
+                                        ),
                                       ),
-                                    ),
-                                    DataCell(
-                                      SizedBox(
-                                        width: 100,
-                                        child: Text(address.logradouro),
+                                      DataCell(
+                                        SizedBox(
+                                          width: 100,
+                                          child: Text(address.logradouro),
+                                        ),
                                       ),
-                                    ),
-                                    DataCell(
-                                      SizedBox(
-                                        width: 100,
-                                        child: Text(address.complemento),
+                                      DataCell(
+                                        SizedBox(
+                                          width: 100,
+                                          child: Text(address.complemento),
+                                        ),
                                       ),
-                                    ),
-                                    DataCell(
-                                      SizedBox(
-                                        width: 100,
-                                        child: Text(address.bairro),
+                                      DataCell(
+                                        SizedBox(
+                                          width: 100,
+                                          child: Text(address.bairro),
+                                        ),
                                       ),
-                                    ),
-                                    DataCell(
-                                      SizedBox(
-                                        width: 100,
-                                        child: Text(address.localidade),
+                                      DataCell(
+                                        SizedBox(
+                                          width: 100,
+                                          child: Text(address.localidade),
+                                        ),
                                       ),
-                                    ),
-                                    DataCell(
-                                      SizedBox(
-                                        width: 50,
-                                        child: Text(address.uf),
+                                      DataCell(
+                                        SizedBox(
+                                          width: 50,
+                                          child: Text(address.uf),
+                                        ),
                                       ),
-                                    ),
-                                    DataCell(
-                                      SizedBox(
-                                        width: 100,
-                                        child: Text(address.ibge),
+                                      DataCell(
+                                        SizedBox(
+                                          width: 100,
+                                          child: Text(address.ibge),
+                                        ),
                                       ),
-                                    ),
-                                    const DataCell(
-                                      SizedBox(
-                                        width: 100,
-                                        child: Icon(Icons.menu),
+                                      const DataCell(
+                                        SizedBox(
+                                          width: 100,
+                                          child: Icon(Icons.menu),
+                                        ),
                                       ),
-                                    ),
-                                  ],
-                                ),
-                              )
-                              .toList(),
+                                    ],
+                                  ),
+                                )
+                                .toList(),
+                          ),
                         ),
-                      ),
-                    );
-            }),
+                      );
+              },
+            ),
           ),
         ),
       ],
