@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:get/state_manager.dart';
 import 'package:seven_pay/module/address/data/via_cep_repository.dart';
 import 'package:seven_pay/module/address/models/address_via_cep.dart';
+import 'package:seven_pay/module/address/states/address_getx.dart';
+import 'package:seven_pay/module/address/states/address_mobx.dart';
+import 'package:seven_pay/module/address/states/address_state.dart';
 import 'package:seven_pay/shared/show_snack_bar.dart';
 
 class AddressController {
-  final _viaCepRepository = ViaCepRepository();
-  final addressList = RxList<Address>([]);
-  final originalAddressList = RxList<Address>([]);
+  late final AddressState addressState;
 
-  final isLoading = false.obs;
+  final _viaCepRepository = ViaCepRepository();
 
   final controllerFu = TextEditingController();
   final controllerCity = TextEditingController();
@@ -18,7 +18,19 @@ class AddressController {
   final controllerNeighborhoodFilter = TextEditingController();
   final controllerFuFilter = TextEditingController();
 
-  final isDialogShown = false.obs;
+  AddressController() {
+    _setTypeState();
+  }
+
+  void _setTypeState() {
+    const typeState = String.fromEnvironment('TYPE_STATE');
+
+    if (typeState.contains('getx')) {
+      addressState = AddressGetx();
+    } else {
+      addressState = AddressMobx();
+    }
+  }
 
   Future<void> searchAddress({
     required String fu,
@@ -27,7 +39,7 @@ class AddressController {
     required BuildContext context,
   }) async {
     try {
-      isLoading.value = true;
+      addressState.isLoading = true;
 
       final adresses = await _viaCepRepository.searchAddress(
         fu: fu,
@@ -43,7 +55,7 @@ class AddressController {
         backgroundColor: Colors.red,
       );
     } finally {
-      isLoading.value = false;
+      addressState.isLoading = false;
     }
   }
 
@@ -52,12 +64,13 @@ class AddressController {
     required String fu,
     required BuildContext context,
   }) async {
-    isLoading.value = true;
+    addressState.isLoading = true;
 
     final isFilled = neighborhood.isNotEmpty || fu.isNotEmpty;
 
     if (isFilled) {
-      final filteredAddresses = originalAddressList.where((address) {
+      final filteredAddresses =
+          addressState.originalAddressList.where((address) {
         final bairro = address.bairro.toLowerCase().trim();
         final estado = address.uf.toLowerCase().trim();
         final searchNeighborhood = neighborhood.toLowerCase().trim();
@@ -72,19 +85,19 @@ class AddressController {
         return false;
       }).toList();
 
-      addressList.clear();
-      addressList.addAll(filteredAddresses);
+      addressState.addressList.clear();
+      addressState.addressList.addAll(filteredAddresses);
     }
 
-    isLoading.value = false;
+    addressState.isLoading = false;
   }
 
   void _setAddress(List<Address> adresses) {
-    addressList.clear();
-    originalAddressList.clear();
+    addressState.addressList.clear();
+    addressState.originalAddressList.clear();
 
-    addressList.addAll(adresses);
-    originalAddressList.addAll(adresses);
+    addressState.addressList.addAll(adresses);
+    addressState.originalAddressList.addAll(adresses);
   }
 
   void clearFields() {
